@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soil Testing - ENGEO INCORPORATED</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
 
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .btn {
+        background-color: #1d4ed8;
+        color: white;
+        padding: 15px 30px;
+        margin: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1.2rem;
+      }
+
+      .btn:hover {
+        background-color: #2563eb;
+      }
+
+      .form-container {
+        margin-top: 20px;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .back-btn {
+        margin-top: 20px;
+        background-color: #e5e7eb;
+        color: #333;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Soil Testing</h1>
+
+    <div class="form-container">
+      <input type="text" placeholder="Job Number" id="jobNumber" />
+      
+      <select id="testSelection">
+        <option value="Proctor">Proctor</option>
+        <option value="Sieve Wash">Sieve Wash</option>
+        <option value="PI">PI</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <div id="customTestSection" style="display: none;">
+        <textarea id="customTest" placeholder="Enter Custom Test"></textarea>
+      </div>
+
+      <button class="btn" onclick="submitForm()">Submit Test</button>
+    </div>
+
+    <div class="button-container">
+      <a href="sampling.html">
+        <button class="btn back-btn">Back to Sampling</button>
+      </a>
+    </div>
+
+    <script>
+      // Show/Hide the custom test input if "Other" is selected
+      document.getElementById('testSelection').addEventListener('change', function () {
+        const customTestSection = document.getElementById('customTestSection');
+        if (this.value === 'Other') {
+          customTestSection.style.display = 'block';
+        } else {
+          customTestSection.style.display = 'none';
+        }
+      });
+
+      // Function to handle form submission (could be expanded to save data)
+      function submitForm() {
+        const jobNumber = document.getElementById('jobNumber').value;
+        const selectedTest = document.getElementById('testSelection').value;
+        const customTest = document.getElementById('customTest').value;
+
+        if (!jobNumber) {
+          alert('Please enter a job number.');
+          return;
+        }
+
+        if (selectedTest === 'Other' && !customTest) {
+          alert('Please enter a custom test description.');
+          return;
+        }
+
+        alert('Test submitted for job number: ' + jobNumber);
+        // Here, you could add functionality to save or send this data, e.g., using a backend or localStorage.
+      }
+    </script>
+  </body>
+</html>
