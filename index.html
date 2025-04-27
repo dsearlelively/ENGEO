@@ -25,6 +25,11 @@
       border: none;
       cursor: pointer;
       font-size: 1.1rem;
+      width: 100%;
+      max-width: 300px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .button:hover {
       background-color: #2563eb;
@@ -51,6 +56,14 @@
     select {
       background-color: #f9f9f9;
     }
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .space-y-4 > * {
+      margin-bottom: 16px;
+    }
   </style>
 </head>
 <body>
@@ -59,89 +72,128 @@
   
   <div class="container" id="mainPage">
     <button class="button" onclick="showFieldInspection()">Field Inspections</button>
+    <button class="button" onclick="showReview()">Review</button>
+    <button class="button" onclick="showProjectAdministration()">Project Administration</button>
   </div>
 
   <div class="container" id="fieldInspection" style="display:none;">
-    <button class="button" onclick="showDailyObservation()">Add Daily Field Observation</button>
-    <button class="button" onclick="showSampling()">Sampling</button>
-    <button class="button" onclick="backToMainPage()">Back</button>
+    <div class="flex-column space-y-4">
+      <button class="button" onclick="showDailyObservation()">Add Daily Field Observation</button>
+      <button class="button" onclick="showSampling()">Sampling</button>
+      <button class="button" onclick="backToMainPage()">Back</button>
+    </div>
+  </div>
+
+  <div class="container" id="review" style="display:none;">
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="searchJobNumber" placeholder="Search Job Number" />
+      </div>
+      <button class="button" onclick="viewLabResults()">View Lab Results</button>
+      <button class="button" onclick="backToMainPage()">Back</button>
+    </div>
+  </div>
+
+  <div class="container" id="projectAdministration" style="display:none;">
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="editJobNumber" placeholder="Enter Job Number to Edit" />
+      </div>
+      <div class="form-group">
+        <textarea id="editLabResults" placeholder="Edit Lab Test Results"></textarea>
+      </div>
+      <button class="button" onclick="saveEditedResults()">Save Changes</button>
+      <button class="button" onclick="backToMainPage()">Back</button>
+    </div>
   </div>
 
   <div class="container" id="dailyObservation" style="display:none;">
-    <div class="form-group">
-      <input type="text" id="jobNumber" placeholder="Job Number" />
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="jobNumber" placeholder="Job Number" />
+      </div>
+      <div class="form-group">
+        <textarea id="report" placeholder="Observation Report"></textarea>
+      </div>
+      <button class="button" onclick="backToFieldInspection()">Back</button>
     </div>
-    <div class="form-group">
-      <textarea id="report" placeholder="Observation Report"></textarea>
-    </div>
-    <button class="button" onclick="backToFieldInspection()">Back</button>
   </div>
 
   <div class="container" id="sampling" style="display:none;">
-    <button class="button" onclick="showSoil()">Soil</button>
-    <button class="button" onclick="showConcrete()">Concrete</button>
-    <button class="button" onclick="showGrout()">Grout</button>
-    <button class="button" onclick="showOther()">Other</button>
-    <button class="button" onclick="backToFieldInspection()">Back</button>
+    <div class="flex-column space-y-4">
+      <button class="button" onclick="showSoil()">Soil</button>
+      <button class="button" onclick="showConcrete()">Concrete</button>
+      <button class="button" onclick="showGrout()">Grout</button>
+      <button class="button" onclick="showOther()">Other</button>
+      <button class="button" onclick="backToFieldInspection()">Back</button>
+    </div>
   </div>
 
   <div class="container" id="soil" style="display:none;">
-    <div class="form-group">
-      <input type="text" id="soilJobNumber" placeholder="Job Number" />
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="soilJobNumber" placeholder="Job Number" />
+      </div>
+      <div class="form-group">
+        <select id="soilTest" onchange="showCustomTestInput()">
+          <option value="">Select Test</option>
+          <option value="Proctor">Proctor Curve</option>
+          <option value="PI">PI</option>
+          <option value="GEX Suite">GEX Suite</option>
+          <option value="Sieve Wash">Sieve Wash</option>
+          <option value="Wash #200">Wash #200</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group" id="customTestInput" style="display:none;">
+        <input type="text" id="customTest" placeholder="Enter Custom Test" />
+      </div>
+      <button class="button" onclick="backToSampling()">Back</button>
     </div>
-    <div class="form-group">
-      <select id="soilTest" onchange="showCustomTestInput()">
-        <option value="">Select Test</option>
-        <option value="Proctor">Proctor Curve</option>
-        <option value="PI">PI</option>
-        <option value="GEX Suite">GEX Suite</option>
-        <option value="Sieve Wash">Sieve Wash</option>
-        <option value="Wash #200">Wash #200</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-    <div class="form-group" id="customTestInput" style="display:none;">
-      <input type="text" id="customTest" placeholder="Enter Custom Test" />
-    </div>
-    <button class="button" onclick="backToSampling()">Back</button>
   </div>
 
   <div class="container" id="concrete" style="display:none;">
-    <div class="form-group">
-      <input type="text" id="concreteJobNumber" placeholder="Job Number" />
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="concreteJobNumber" placeholder="Job Number" />
+      </div>
+      <div class="form-group">
+        <input type="text" id="concreteMix" placeholder="Concrete Mix Design & Strength" />
+      </div>
+      <div class="form-group">
+        <p>7 Day Cylinder: 1</p>
+        <p>28 Day Cylinders: 3</p>
+      </div>
+      <button class="button" onclick="backToSampling()">Back</button>
     </div>
-    <div class="form-group">
-      <input type="text" id="concreteMix" placeholder="Concrete Mix Design & Strength" />
-    </div>
-    <div class="form-group">
-      <p>7 Day Cylinder: 1</p>
-      <p>28 Day Cylinders: 3</p>
-    </div>
-    <button class="button" onclick="backToSampling()">Back</button>
   </div>
 
   <div class="container" id="grout" style="display:none;">
-    <div class="form-group">
-      <input type="text" id="groutJobNumber" placeholder="Job Number" />
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="groutJobNumber" placeholder="Job Number" />
+      </div>
+      <div class="form-group">
+        <input type="text" id="groutMix" placeholder="Grout Mix Design & Strength" />
+      </div>
+      <div class="form-group">
+        <p>7 Day Cylinder: 1</p>
+        <p>28 Day Cylinders: 3</p>
+      </div>
+      <button class="button" onclick="backToSampling()">Back</button>
     </div>
-    <div class="form-group">
-      <input type="text" id="groutMix" placeholder="Grout Mix Design & Strength" />
-    </div>
-    <div class="form-group">
-      <p>7 Day Cylinder: 1</p>
-      <p>28 Day Cylinders: 3</p>
-    </div>
-    <button class="button" onclick="backToSampling()">Back</button>
   </div>
 
   <div class="container" id="otherSampling" style="display:none;">
-    <div class="form-group">
-      <input type="text" id="otherJobNumber" placeholder="Job Number" />
+    <div class="flex-column space-y-4">
+      <div class="form-group">
+        <input type="text" id="otherJobNumber" placeholder="Job Number" />
+      </div>
+      <div class="form-group">
+        <textarea id="otherTest" placeholder="Enter Test to be Ran"></textarea>
+      </div>
+      <button class="button" onclick="backToSampling()">Back</button>
     </div>
-    <div class="form-group">
-      <textarea id="otherTest" placeholder="Enter Test to be Ran"></textarea>
-    </div>
-    <button class="button" onclick="backToSampling()">Back</button>
   </div>
 
   <script>
@@ -152,6 +204,8 @@
 
     function backToMainPage() {
       document.getElementById('fieldInspection').style.display = 'none';
+      document.getElementById('review').style.display = 'none';
+      document.getElementById('projectAdministration').style.display = 'none';
       document.getElementById('sampling').style.display = 'none';
       document.getElementById('soil').style.display = 'none';
       document.getElementById('concrete').style.display = 'none';
@@ -160,58 +214,15 @@
       document.getElementById('mainPage').style.display = 'block';
     }
 
-    function showDailyObservation() {
-      document.getElementById('fieldInspection').style.display = 'none';
-      document.getElementById('dailyObservation').style.display = 'block';
+    function showReview() {
+      document.getElementById('mainPage').style.display = 'none';
+      document.getElementById('review').style.display = 'block';
     }
 
-    function backToFieldInspection() {
-      document.getElementById('dailyObservation').style.display = 'none';
-      document.getElementById('fieldInspection').style.display = 'block';
+    function showProjectAdministration() {
+      document.getElementById('mainPage').style.display = 'none';
+      document.getElementById('projectAdministration').style.display = 'block';
     }
 
-    function showSampling() {
-      document.getElementById('fieldInspection').style.display = 'none';
-      document.getElementById('sampling').style.display = 'block';
-    }
-
-    function backToSampling() {
-      document.getElementById('sampling').style.display = 'none';
-      document.getElementById('soil').style.display = 'none';
-      document.getElementById('concrete').style.display = 'none';
-      document.getElementById('grout').style.display = 'none';
-      document.getElementById('otherSampling').style.display = 'none';
-      document.getElementById('sampling').style.display = 'block';
-    }
-
-    function showSoil() {
-      document.getElementById('sampling').style.display = 'none';
-      document.getElementById('soil').style.display = 'block';
-    }
-
-    function showConcrete() {
-      document.getElementById('sampling').style.display = 'none';
-      document.getElementById('concrete').style.display = 'block';
-    }
-
-    function showGrout() {
-      document.getElementById('sampling').style.display = 'none';
-      document.getElementById('grout').style.display = 'block';
-    }
-
-    function showOther() {
-      document.getElementById('sampling').style.display = 'none';
-      document.getElementById('otherSampling').style.display = 'block';
-    }
-
-    function showCustomTestInput() {
-      const testValue = document.getElementById('soilTest').value;
-      if (testValue === 'Other') {
-        document.getElementById('customTestInput').style.display = 'block';
-      } else {
-        document.getElementById('customTestInput').style.display = 'none';
-      }
-    }
-  </script>
-</body>
-</html>
+    function viewLabResults() {
+      const jobNumber = document.getElement
