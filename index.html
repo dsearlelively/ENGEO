@@ -1,4 +1,3 @@
-<!-- Main Page (index.html) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +15,37 @@
       <button class="button" onclick="window.location.href='review.html'">Review</button>
       <button class="button" onclick="window.location.href='project-administration.html'">Project Administration</button>
     </div>
+    <button class="button" onclick="saveData()">Save Data</button>
   </div>
+
+  <script>
+    function saveData() {
+      // Example of saving some basic data in localStorage
+      const fieldObservation = {
+        jobNumber: '12345',
+        observation: 'Daily observation recorded.'
+      };
+      
+      // Save the data to localStorage
+      localStorage.setItem("fieldObservation", JSON.stringify(fieldObservation));
+      alert("Data saved locally!");
+      
+      // If you want to save to a server (using an API)
+      fetch('https://your-api-url-on-render.com/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fieldObservation)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Data saved to server:', data);
+      })
+      .catch(error => {
+        console.error('Error saving data:', error);
+      });
+    }
+  </script>
 </body>
 </html>
