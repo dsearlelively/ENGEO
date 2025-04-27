@@ -1,65 +1,21 @@
+<!-- Field Inspections (field-inspection.html) -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Field Inspections - ENGEO INCORPORATED</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-        background-color: #f4f4f4;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Inspections</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Field Inspections</h1>
 
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 30px;
-        color: #333;
-      }
-
-      .btn {
-        background-color: #1d4ed8;
-        color: white;
-        padding: 15px 30px;
-        margin: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 1.2rem;
-      }
-
-      .btn:hover {
-        background-color: #2563eb;
-      }
-
-      .button-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .back-btn {
-        margin-top: 20px;
-        background-color: #e5e7eb;
-        color: #333;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Field Inspections</h1>
-    <div class="button-container">
-      <a href="daily-observation.html">
-        <button class="btn">Add Daily Field Observation</button>
-      </a>
-      <a href="sampling.html">
-        <button class="btn">Sampling</button>
-      </a>
-      <a href="index.html">
-        <button class="btn back-btn">Back to Main Page</button>
-      </a>
+    <div class="buttons">
+      <button class="button" onclick="window.location.href='daily-field-observation.html'">Add Daily Field Observation</button>
+      <button class="button" onclick="window.location.href='sampling.html'">Sampling</button>
+      <button class="button" onclick="window.location.href='main.html'">Back</button>
     </div>
-  </body>
+  </div>
+</body>
 </html>
