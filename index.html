@@ -1,238 +1,227 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button"; // Assuming you have these components
-import { Input } from "@/components/ui/input"; // Assuming you have these components
-import { Textarea } from "@/components/ui/textarea"; // Assuming you have these components
-import { Select, SelectItem } from "@/components/ui/select"; // Assuming you have these components
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENGEO INCORPORATED</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2em;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background-color: #2980b9;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    .input, .textarea, .select {
+      margin: 10px 0;
+      padding: 8px;
+      font-size: 1em;
+      width: 80%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
 
-export default function MainPage() {
-  const [view, setView] = useState("main");
-  const [jobNumber, setJobNumber] = useState("");
-  const [report, setReport] = useState("");
-  const [mixDesign, setMixDesign] = useState("");
-  const [selectedTest, setSelectedTest] = useState("");
-  const [customTest, setCustomTest] = useState("");
+  <div id="root"></div>
 
-  return (
-    <div className="p-6 space-y-6 max-w-2xl mx-auto text-center">
-      <h1 className="text-3xl font-bold mb-6">ENGEO INCORPORATED</h1>
+  <script type="text/babel">
 
-      {/* Main Page View */}
-      {view === "main" && (
-        <div className="flex flex-col space-y-4">
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("field")}
-          >
-            Field Inspections
-          </Button>
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("review")}
-          >
-            Review
-          </Button>
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("projectAdmin")}
-          >
-            Project Administration
-          </Button>
-        </div>
-      )}
+    const { useState } = React;
 
-      {/* Field Inspections Section */}
-      {view === "field" && (
-        <div className="flex flex-col space-y-4">
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("dailyObservation")}
-          >
-            Add Daily Field Observation
-          </Button>
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("sampling")}
-          >
-            Sampling
-          </Button>
-          <Button variant="outline" onClick={() => setView("main")}>
-            Back
-          </Button>
-        </div>
-      )}
+    function MainPage() {
+      const [view, setView] = useState("main");
+      const [jobNumber, setJobNumber] = useState("");
+      const [report, setReport] = useState("");
+      const [mixDesign, setMixDesign] = useState("");
+      const [selectedTest, setSelectedTest] = useState("");
+      const [customTest, setCustomTest] = useState("");
 
-      {/* Add Daily Field Observation */}
-      {view === "dailyObservation" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Job Number"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Textarea
-            placeholder="Observation Report"
-            value={report}
-            onChange={(e) => setReport(e.target.value)}
-          />
-          <Button variant="outline" onClick={() => setView("field")}>
-            Back
-          </Button>
-        </div>
-      )}
+      return (
+        <div>
+          <h1>ENGEO INCORPORATED</h1>
 
-      {/* Sampling Section */}
-      {view === "sampling" && (
-        <div className="flex flex-col space-y-4">
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("soil")}
-          >
-            Soil
-          </Button>
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("concrete")}
-          >
-            Concrete
-          </Button>
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("grout")}
-          >
-            Grout
-          </Button>
-          <Button
-            className="bg-blue-600 text-white"
-            onClick={() => setView("otherSampling")}
-          >
-            Other
-          </Button>
-          <Button variant="outline" onClick={() => setView("field")}>
-            Back
-          </Button>
-        </div>
-      )}
-
-      {/* Soil Sampling */}
-      {view === "soil" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Job Number"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Select onValueChange={(value) => setSelectedTest(value)}>
-            <SelectItem value="Proctor">Proctor</SelectItem>
-            <SelectItem value="Sieve Wash">Sieve Wash</SelectItem>
-            <SelectItem value="PI">PI</SelectItem>
-            <SelectItem value="GEX Suite">GEX Suite</SelectItem>
-            <SelectItem value="Other">Other</SelectItem>
-          </Select>
-          {selectedTest === "Other" && (
-            <Input
-              placeholder="Enter Custom Test"
-              value={customTest}
-              onChange={(e) => setCustomTest(e.target.value)}
-            />
+          {view === "main" && (
+            <div>
+              <button className="btn" onClick={() => setView("field")}>Field Inspections</button>
+              <button className="btn" onClick={() => setView("review")}>Review</button>
+              <button className="btn" onClick={() => setView("projectAdmin")}>Project Administration</button>
+            </div>
           )}
-          <Button variant="outline" onClick={() => setView("sampling")}>
-            Back
-          </Button>
-        </div>
-      )}
 
-      {/* Concrete Sampling */}
-      {view === "concrete" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Job Number"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Input
-            placeholder="Concrete Mix Design & Strength"
-            value={mixDesign}
-            onChange={(e) => setMixDesign(e.target.value)}
-          />
-          <div className="space-y-2">
-            <p>7 Day Cylinder: 1</p>
-            <p>28 Day Cylinders: 3</p>
-          </div>
-          <Button variant="outline" onClick={() => setView("sampling")}>
-            Back
-          </Button>
-        </div>
-      )}
+          {view === "field" && (
+            <div>
+              <button className="btn" onClick={() => setView("dailyObservation")}>Add Daily Field Observation</button>
+              <button className="btn" onClick={() => setView("sampling")}>Sampling</button>
+              <button className="btn" onClick={() => setView("main")}>Back</button>
+            </div>
+          )}
 
-      {/* Grout Sampling */}
-      {view === "grout" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Job Number"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Input
-            placeholder="Grout Mix Design & Strength"
-            value={mixDesign}
-            onChange={(e) => setMixDesign(e.target.value)}
-          />
-          <div className="space-y-2">
-            <p>7 Day Cylinder: 1</p>
-            <p>28 Day Cylinders: 3</p>
-          </div>
-          <Button variant="outline" onClick={() => setView("sampling")}>
-            Back
-          </Button>
-        </div>
-      )}
+          {view === "dailyObservation" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Job Number"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <textarea
+                className="textarea"
+                placeholder="Observation Report"
+                value={report}
+                onChange={(e) => setReport(e.target.value)}
+              />
+              <button className="btn" onClick={() => setView("field")}>Back</button>
+            </div>
+          )}
 
-      {/* Other Sampling */}
-      {view === "otherSampling" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Job Number"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Textarea
-            placeholder="Enter Test to be Ran"
-            value={customTest}
-            onChange={(e) => setCustomTest(e.target.value)}
-          />
-          <Button variant="outline" onClick={() => setView("sampling")}>
-            Back
-          </Button>
-        </div>
-      )}
+          {view === "sampling" && (
+            <div className="section">
+              <button className="btn" onClick={() => setView("soil")}>Soil</button>
+              <button className="btn" onClick={() => setView("concrete")}>Concrete</button>
+              <button className="btn" onClick={() => setView("grout")}>Grout</button>
+              <button className="btn" onClick={() => setView("otherSampling")}>Other</button>
+              <button className="btn" onClick={() => setView("field")}>Back</button>
+            </div>
+          )}
 
-      {/* Review Section */}
-      {view === "review" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Search Job Number"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Button variant="outline" onClick={() => setView("main")}>
-            Back
-          </Button>
-        </div>
-      )}
+          {view === "soil" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Job Number"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <select className="select" onChange={(e) => setSelectedTest(e.target.value)}>
+                <option value="Proctor">Proctor</option>
+                <option value="Sieve Wash">Sieve Wash</option>
+                <option value="PI">PI</option>
+                <option value="GEX Suite">GEX Suite</option>
+                <option value="Other">Other</option>
+              </select>
+              {selectedTest === "Other" && (
+                <input
+                  className="input"
+                  placeholder="Enter Custom Test"
+                  value={customTest}
+                  onChange={(e) => setCustomTest(e.target.value)}
+                />
+              )}
+              <button className="btn" onClick={() => setView("sampling")}>Back</button>
+            </div>
+          )}
 
-      {/* Project Administration Section */}
-      {view === "projectAdmin" && (
-        <div className="flex flex-col space-y-4">
-          <Input
-            placeholder="Search and Edit Lab Test Results"
-            value={jobNumber}
-            onChange={(e) => setJobNumber(e.target.value)}
-          />
-          <Button variant="outline" onClick={() => setView("main")}>
-            Back
-          </Button>
+          {view === "concrete" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Job Number"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <input
+                className="input"
+                placeholder="Concrete Mix Design & Strength"
+                value={mixDesign}
+                onChange={(e) => setMixDesign(e.target.value)}
+              />
+              <p>7 Day Cylinder: 1</p>
+              <p>28 Day Cylinders: 3</p>
+              <button className="btn" onClick={() => setView("sampling")}>Back</button>
+            </div>
+          )}
+
+          {view === "grout" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Job Number"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <input
+                className="input"
+                placeholder="Grout Mix Design & Strength"
+                value={mixDesign}
+                onChange={(e) => setMixDesign(e.target.value)}
+              />
+              <p>7 Day Cylinder: 1</p>
+              <p>28 Day Cylinders: 3</p>
+              <button className="btn" onClick={() => setView("sampling")}>Back</button>
+            </div>
+          )}
+
+          {view === "otherSampling" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Job Number"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <textarea
+                className="textarea"
+                placeholder="Enter Test to be Ran"
+                value={customTest}
+                onChange={(e) => setCustomTest(e.target.value)}
+              />
+              <button className="btn" onClick={() => setView("sampling")}>Back</button>
+            </div>
+          )}
+
+          {view === "review" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Search Job Number"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <button className="btn" onClick={() => setView("main")}>Back</button>
+            </div>
+          )}
+
+          {view === "projectAdmin" && (
+            <div className="section">
+              <input
+                className="input"
+                placeholder="Search and Edit Lab Test Results"
+                value={jobNumber}
+                onChange={(e) => setJobNumber(e.target.value)}
+              />
+              <button className="btn" onClick={() => setView("main")}>Back</button>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  );
-}
+      );
+    }
+
+    ReactDOM.render(<MainPage />, document.getElementById("root"));
+  </script>
+
+</body>
+</html>
