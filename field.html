@@ -1,20 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Field - Engeo Incorporated</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Field Inspections - ENGEO INCORPORATED</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f3f3f3; margin: 0; padding: 0; text-align: center; }
-        h1 { color: #2d3e50; margin-top: 50px; }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .btn {
+        background-color: #1d4ed8;
+        color: white;
+        padding: 15px 30px;
+        margin: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1.2rem;
+      }
+
+      .btn:hover {
+        background-color: #2563eb;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .back-btn {
+        margin-top: 20px;
+        background-color: #e5e7eb;
+        color: #333;
+      }
     </style>
-</head>
-<body>
-
-    <h1>Field Testing and Sample Management</h1>
-    <p>Here, you can add details related to field testing, sample collection, and tracking.</p>
-    
-    <a href="index.html">Back to Home</a>
-
-</body>
+  </head>
+  <body>
+    <h1>Field Inspections</h1>
+    <div class="button-container">
+      <a href="daily-observation.html">
+        <button class="btn">Add Daily Field Observation</button>
+      </a>
+      <a href="sampling.html">
+        <button class="btn">Sampling</button>
+      </a>
+      <a href="index.html">
+        <button class="btn back-btn">Back to Main Page</button>
+      </a>
+    </div>
+  </body>
 </html>
