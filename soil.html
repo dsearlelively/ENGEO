@@ -1,123 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Soil Testing - ENGEO INCORPORATED</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Testing</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-        background-color: #f4f4f4;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
 
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 30px;
-        color: #333;
-      }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-      .btn {
-        background-color: #1d4ed8;
-        color: white;
-        padding: 15px 30px;
-        margin: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 1.2rem;
-      }
+        .form-field {
+            margin-bottom: 20px;
+        }
 
-      .btn:hover {
-        background-color: #2563eb;
-      }
+        input, select {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
 
-      .form-container {
-        margin-top: 20px;
-      }
+        .button-link {
+            background-color: #003366;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px 0;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
 
-      input,
-      select,
-      textarea {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      .back-btn {
-        margin-top: 20px;
-        background-color: #e5e7eb;
-        color: #333;
-      }
-
-      .button-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
+        .button-link:hover {
+            background-color: #002244;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
+<div class="container">
     <h1>Soil Testing</h1>
+    <form>
+        <!-- Job Number Field -->
+        <div class="form-field">
+            <label for="jobNumber">Job Number:</label>
+            <input type="text" id="jobNumber" name="jobNumber" placeholder="Enter Job Number">
+        </div>
 
-    <div class="form-container">
-      <input type="text" placeholder="Job Number" id="jobNumber" />
-      
-      <select id="testSelection">
-        <option value="Proctor">Proctor</option>
-        <option value="Sieve Wash">Sieve Wash</option>
-        <option value="PI">PI</option>
-        <option value="Other">Other</option>
-      </select>
+        <!-- Test Type Selection -->
+        <div class="form-field">
+            <label for="testType">Test Type:</label>
+            <select id="testType" name="testType" onchange="toggleAdditionalFields()">
+                <option value="">Select Test Type</option>
+                <option value="Proctor">Proctor</option>
+                <option value="PI">PI</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
 
-      <div id="customTestSection" style="display: none;">
-        <textarea id="customTest" placeholder="Enter Custom Test"></textarea>
-      </div>
+        <!-- Soil Color and Type Fields (hidden by default) -->
+        <div id="proctorFields" style="display:none;">
+            <div class="form-field">
+                <label for="soilColor">Soil Color:</label>
+                <input type="text" id="soilColor" name="soilColor" placeholder="Enter Soil Color">
+            </div>
 
-      <button class="btn" onclick="submitForm()">Submit Test</button>
-    </div>
+            <div class="form-field">
+                <label for="soilType">Soil Type:</label>
+                <input type="text" id="soilType" name="soilType" placeholder="Enter Soil Type">
+            </div>
+        </div>
 
-    <div class="button-container">
-      <a href="sampling.html">
-        <button class="btn back-btn">Back to Sampling</button>
-      </a>
-    </div>
+        <!-- Submit Button -->
+        <button type="submit" class="button-link">Submit</button>
+    </form>
 
-    <script>
-      // Show/Hide the custom test input if "Other" is selected
-      document.getElementById('testSelection').addEventListener('change', function () {
-        const customTestSection = document.getElementById('customTestSection');
-        if (this.value === 'Other') {
-          customTestSection.style.display = 'block';
+    <!-- Back Button -->
+    <a href="index.html" class="button-link">Back to Main</a>
+</div>
+
+<script>
+    function toggleAdditionalFields() {
+        var testType = document.getElementById("testType").value;
+        var proctorFields = document.getElementById("proctorFields");
+
+        // Show or hide the extra fields based on selected test type
+        if (testType === "Proctor") {
+            proctorFields.style.display = "block";
         } else {
-          customTestSection.style.display = 'none';
+            proctorFields.style.display = "none";
         }
-      });
+    }
+</script>
 
-      // Function to handle form submission (could be expanded to save data)
-      function submitForm() {
-        const jobNumber = document.getElementById('jobNumber').value;
-        const selectedTest = document.getElementById('testSelection').value;
-        const customTest = document.getElementById('customTest').value;
-
-        if (!jobNumber) {
-          alert('Please enter a job number.');
-          return;
-        }
-
-        if (selectedTest === 'Other' && !customTest) {
-          alert('Please enter a custom test description.');
-          return;
-        }
-
-        alert('Test submitted for job number: ' + jobNumber);
-        // Here, you could add functionality to save or send this data, e.g., using a backend or localStorage.
-      }
-    </script>
-  </body>
+</body>
 </html>
