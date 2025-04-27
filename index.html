@@ -1,62 +1,21 @@
+<!-- Main Page (index.html) -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ENGEO INCORPORATED</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding: 20px;
-        background-color: #f4f4f4;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENGEO INCORPORATED</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">ENGEO INCORPORATED</h1>
 
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 30px;
-        color: #333;
-      }
-
-      .btn {
-        background-color: #1d4ed8;
-        color: white;
-        padding: 15px 30px;
-        margin: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 1.2rem;
-      }
-
-      .btn:hover {
-        background-color: #2563eb;
-      }
-
-      .button-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>ENGEO INCORPORATED</h1>
-    <div class="button-container">
-      <a href="field.html">
-        <button class="btn">Field Inspections</button>
-      </a>
-      <a href="sampling.html">
-        <button class="btn">Sampling</button>
-      </a>
-      <a href="review.html">
-        <button class="btn">Review</button>
-      </a>
-      <a href="project-admin.html">
-        <button class="btn">Project Administration</button>
-      </a>
+    <div class="buttons">
+      <button class="button" onclick="window.location.href='field-inspection.html'">Field Inspections</button>
+      <button class="button" onclick="window.location.href='review.html'">Review</button>
+      <button class="button" onclick="window.location.href='project-administration.html'">Project Administration</button>
     </div>
-  </body>
+  </div>
+</body>
 </html>
