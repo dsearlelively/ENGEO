@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENGEO INCORPORATED</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>ENGEO INCORPORATED</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            margin-bottom: 40px;
+            font-size: 36px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .button-link {
+            background-color: #003366; /* Dark Blue */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            width: 250px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .button-link:hover {
+            background-color: #002244; /* Even Darker Blue on hover */
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">ENGEO INCORPORATED</h1>
 
-    <div class="buttons">
-      <button class="button" onclick="window.location.href='field-inspection.html'">Field Inspections</button>
-      <button class="button" onclick="window.location.href='review.html'">Review</button>
-      <button class="button" onclick="window.location.href='project-administration.html'">Project Administration</button>
+    <h1>ENGEO INCORPORATED</h1>
+
+    <div class="button-container">
+        <a href="field.html" class="button-link">Field Inspections</a>
+        <a href="review.html" class="button-link">Review</a>
+        <a href="project-admin.html" class="button-link">Project Administration</a>
     </div>
-    <button class="button" onclick="saveData()">Save Data</button>
-  </div>
 
-  <script>
-    function saveData() {
-      // Example of saving some basic data in localStorage
-      const fieldObservation = {
-        jobNumber: '12345',
-        observation: 'Daily observation recorded.'
-      };
-      
-      // Save the data to localStorage
-      localStorage.setItem("fieldObservation", JSON.stringify(fieldObservation));
-      alert("Data saved locally!");
-      
-      // If you want to save to a server (using an API)
-      fetch('https://your-api-url-on-render.com/save', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(fieldObservation)
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Data saved to server:', data);
-      })
-      .catch(error => {
-        console.error('Error saving data:', error);
-      });
-    }
-  </script>
 </body>
 </html>
