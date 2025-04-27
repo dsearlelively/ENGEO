@@ -152,8 +152,8 @@
         const newCylinderField = document.createElement('div');
         newCylinderField.classList.add('form-field');
         newCylinderField.innerHTML = `
-            <input type="number" name="cylinderCount[]" placeholder="Number of Cylinders" min="4" required>
-            <input type="text" name="cylinderDay[]" placeholder="Day (7 or 28)" required>
+            <input type="number" name="cylinderCount[]" placeholder="Number of Cylinders" min="1" required>
+            <input type="text" name="cylinderDay[]" placeholder="Day ()" required>
         `;
         cylinderFields.appendChild(newCylinderField);
     }
