@@ -1,237 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENGEO INCORPORATED</title>
-  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-      background-color: #f0f0f0;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-    .btn {
-      background-color: #2c6cbf; /* Darker blue */
-      color: white;
-      padding: 10px 20px;
-      margin: 10px 0; /* Added margin for space between buttons */
-      border: none;
-      cursor: pointer;
-      font-size: 1.2em;
-      border-radius: 5px;
-      display: block;
-      width: 80%; /* Ensures the buttons take up most of the page width */
-      max-width: 400px; /* Maximum button width */
-      margin-left: auto;
-      margin-right: auto; /* Centers the button horizontally */
-    }
-    .btn:hover {
-      background-color: #245a8a; /* Darker shade on hover */
-    }
-    .section {
-      margin-top: 20px;
-    }
-    .input, .textarea, .select {
-      margin: 10px 0;
-      padding: 8px;
-      font-size: 1em;
-      width: 80%;
-      max-width: 400px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto; /* Centers the input fields */
-    }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENGEO INCORPORATED</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
 
-  <div id="root"></div>
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+        color: #333;
+      }
 
-  <script type="text/babel">
+      .btn {
+        background-color: #1d4ed8;
+        color: white;
+        padding: 15px 30px;
+        margin: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1.2rem;
+      }
 
-    const { useState } = React;
+      .btn:hover {
+        background-color: #2563eb;
+      }
 
-    function MainPage() {
-      const [view, setView] = useState("main");
-      const [jobNumber, setJobNumber] = useState("");
-      const [report, setReport] = useState("");
-      const [mixDesign, setMixDesign] = useState("");
-      const [selectedTest, setSelectedTest] = useState("");
-      const [customTest, setCustomTest] = useState("");
-
-      // Data for fields
-      const [dailyObservationData, setDailyObservationData] = useState({
-        jobNumber: "",
-        report: ""
-      });
-
-      // Update state when inputs change
-      const handleFieldObservationChange = (e) => {
-        const { name, value } = e.target;
-        setDailyObservationData((prevState) => ({
-          ...prevState,
-          [name]: value
-        }));
-      };
-
-      return (
-        <div>
-          <h1>ENGEO INCORPORATED</h1>
-
-          {view === "main" && (
-            <div>
-              <button className="btn" onClick={() => setView("field")}>Field Inspections</button>
-              <button className="btn" onClick={() => setView("review")}>Review</button>
-              <button className="btn" onClick={() => setView("projectAdmin")}>Project Administration</button>
-            </div>
-          )}
-
-          {view === "field" && (
-            <div>
-              <button className="btn" onClick={() => setView("dailyObservation")}>Add Daily Field Observation</button>
-              <button className="btn" onClick={() => setView("sampling")}>Sampling</button>
-              <button className="btn" onClick={() => setView("main")}>Back</button>
-            </div>
-          )}
-
-          {view === "dailyObservation" && (
-            <div className="section">
-              <input
-                className="input"
-                placeholder="Job Number"
-                value={dailyObservationData.jobNumber}
-                name="jobNumber"
-                onChange={handleFieldObservationChange}
-              />
-              <textarea
-                className="textarea"
-                placeholder="Observation Report"
-                value={dailyObservationData.report}
-                name="report"
-                onChange={handleFieldObservationChange}
-              />
-              <button className="btn" onClick={() => setView("field")}>Back</button>
-              <button className="btn" onClick={() => alert("Data Saved")}>Save Observation</button> {/* Add Save button */}
-            </div>
-          )}
-
-          {view === "sampling" && (
-            <div className="section">
-              <button className="btn" onClick={() => setView("soil")}>Soil</button>
-              <button className="btn" onClick={() => setView("concrete")}>Concrete</button>
-              <button className="btn" onClick={() => setView("grout")}>Grout</button>
-              <button className="btn" onClick={() => setView("otherSampling")}>Other</button>
-              <button className="btn" onClick={() => setView("field")}>Back</button>
-            </div>
-          )}
-
-          {view === "soil" && (
-            <div className="section">
-              <input
-                className="input"
-                placeholder="Job Number"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
-              />
-              <select className="select" onChange={(e) => setSelectedTest(e.target.value)}>
-                <option value="Proctor">Proctor</option>
-                <option value="Sieve Wash">Sieve Wash</option>
-                <option value="PI">PI</option>
-                <option value="GEX Suite">GEX Suite</option>
-                <option value="Other">Other</option>
-              </select>
-              {selectedTest === "Other" && (
-                <input
-                  className="input"
-                  placeholder="Enter Custom Test"
-                  value={customTest}
-                  onChange={(e) => setCustomTest(e.target.value)}
-                />
-              )}
-              <button className="btn" onClick={() => setView("sampling")}>Back</button>
-            </div>
-          )}
-
-          {view === "concrete" && (
-            <div className="section">
-              <input
-                className="input"
-                placeholder="Job Number"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
-              />
-              <input
-                className="input"
-                placeholder="Concrete Mix Design & Strength"
-                value={mixDesign}
-                onChange={(e) => setMixDesign(e.target.value)}
-              />
-              <p>7 Day Cylinder: 1</p>
-              <p>28 Day Cylinders: 3</p>
-              <button className="btn" onClick={() => setView("sampling")}>Back</button>
-            </div>
-          )}
-
-          {view === "grout" && (
-            <div className="section">
-              <input
-                className="input"
-                placeholder="Job Number"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
-              />
-              <input
-                className="input"
-                placeholder="Grout Mix Design & Strength"
-                value={mixDesign}
-                onChange={(e) => setMixDesign(e.target.value)}
-              />
-              <p>7 Day Cylinder: 1</p>
-              <p>28 Day Cylinders: 3</p>
-              <button className="btn" onClick={() => setView("sampling")}>Back</button>
-            </div>
-          )}
-
-          {view === "otherSampling" && (
-            <div className="section">
-              <input
-                className="input"
-                placeholder="Job Number"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
-              />
-              <textarea
-                className="textarea"
-                placeholder="Enter Test to be Ran"
-                value={customTest}
-                onChange={(e) => setCustomTest(e.target.value)}
-              />
-              <button className="btn" onClick={() => setView("sampling")}>Back</button>
-            </div>
-          )}
-
-          {view === "review" && (
-            <div className="section">
-              <input
-                className="input"
-                placeholder="Search Job Number"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
-              />
-              <button className="btn" onClick={() => setView("main")}>Back</button>
-            </div>
-          )}
-
-          {view === "projectAdmin" && (
-            <div className="section">
-              <input
-                className="
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ENGEO INCORPORATED</h1>
+    <div class="button-container">
+      <a href="field.html">
+        <button class="btn">Field Inspections</button>
+      </a>
+      <a href="sampling.html">
+        <button class="btn">Sampling</button>
+      </a>
+      <a href="review.html">
+        <button class="btn">Review</button>
+      </a>
+      <a href="project-admin.html">
+        <button class="btn">Project Administration</button>
+      </a>
+    </div>
+  </body>
+</html>
