@@ -8,13 +8,18 @@
         body { font-family: Arial, sans-serif; background-color: #f3f3f3; margin: 0; padding: 0; text-align: center; }
         .container { padding: 50px 0; }
         .logo { font-size: 48px; font-weight: bold; color: #2d3e50; margin-bottom: 50px; }
-        .button-container { display: flex; justify-content: center; margin-top: 40px; }
+        .button-container { 
+            display: flex; 
+            flex-direction: column; /* Stacking vertically */
+            align-items: center; /* Center horizontally */
+            margin-top: 40px; 
+        }
         .button-box {
             display: inline-block;
             margin: 20px;
             padding: 20px;
-            background-color: #007bff; /* Blue background */
-            color: white; /* White text */
+            background-color: #007bff;
+            color: white;
             font-size: 24px;
             cursor: pointer;
             text-align: center;
@@ -24,7 +29,7 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .button-box:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
             transform: scale(1.05);
         }
         .button-box a { color: white; text-decoration: none; }
