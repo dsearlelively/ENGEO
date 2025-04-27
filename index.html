@@ -68,6 +68,21 @@
       const [selectedTest, setSelectedTest] = useState("");
       const [customTest, setCustomTest] = useState("");
 
+      // Data for fields
+      const [dailyObservationData, setDailyObservationData] = useState({
+        jobNumber: "",
+        report: ""
+      });
+
+      // Update state when inputs change
+      const handleFieldObservationChange = (e) => {
+        const { name, value } = e.target;
+        setDailyObservationData((prevState) => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
+
       return (
         <div>
           <h1>ENGEO INCORPORATED</h1>
@@ -93,16 +108,19 @@
               <input
                 className="input"
                 placeholder="Job Number"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
+                value={dailyObservationData.jobNumber}
+                name="jobNumber"
+                onChange={handleFieldObservationChange}
               />
               <textarea
                 className="textarea"
                 placeholder="Observation Report"
-                value={report}
-                onChange={(e) => setReport(e.target.value)}
+                value={dailyObservationData.report}
+                name="report"
+                onChange={handleFieldObservationChange}
               />
               <button className="btn" onClick={() => setView("field")}>Back</button>
+              <button className="btn" onClick={() => alert("Data Saved")}>Save Observation</button> {/* Add Save button */}
             </div>
           )}
 
@@ -216,20 +234,4 @@
           {view === "projectAdmin" && (
             <div className="section">
               <input
-                className="input"
-                placeholder="Search and Edit Lab Test Results"
-                value={jobNumber}
-                onChange={(e) => setJobNumber(e.target.value)}
-              />
-              <button className="btn" onClick={() => setView("main")}>Back</button>
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    ReactDOM.render(<MainPage />, document.getElementById("root"));
-  </script>
-
-</body>
-</html>
+                className="
