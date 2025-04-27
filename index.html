@@ -1,228 +1,238 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENGEO INCORPORATED</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-top: 50px;
-      color: #1e3a8a;
-    }
-    .button {
-      background-color: #1e3a8a;
-      color: white;
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 1.1rem;
-      width: 100%;
-      max-width: 300px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .button:hover {
-      background-color: #2563eb;
-    }
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    select {
-      background-color: #f9f9f9;
-    }
-    .flex-column {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .space-y-4 > * {
-      margin-bottom: 16px;
-    }
-  </style>
-</head>
-<body>
+import { useState } from "react";
+import { Button } from "@/components/ui/button"; // Assuming you have these components
+import { Input } from "@/components/ui/input"; // Assuming you have these components
+import { Textarea } from "@/components/ui/textarea"; // Assuming you have these components
+import { Select, SelectItem } from "@/components/ui/select"; // Assuming you have these components
 
-  <h1>ENGEO INCORPORATED</h1>
-  
-  <div class="container" id="mainPage">
-    <button class="button" onclick="showFieldInspection()">Field Inspections</button>
-    <button class="button" onclick="showReview()">Review</button>
-    <button class="button" onclick="showProjectAdministration()">Project Administration</button>
-  </div>
+export default function MainPage() {
+  const [view, setView] = useState("main");
+  const [jobNumber, setJobNumber] = useState("");
+  const [report, setReport] = useState("");
+  const [mixDesign, setMixDesign] = useState("");
+  const [selectedTest, setSelectedTest] = useState("");
+  const [customTest, setCustomTest] = useState("");
 
-  <div class="container" id="fieldInspection" style="display:none;">
-    <div class="flex-column space-y-4">
-      <button class="button" onclick="showDailyObservation()">Add Daily Field Observation</button>
-      <button class="button" onclick="showSampling()">Sampling</button>
-      <button class="button" onclick="backToMainPage()">Back</button>
+  return (
+    <div className="p-6 space-y-6 max-w-2xl mx-auto text-center">
+      <h1 className="text-3xl font-bold mb-6">ENGEO INCORPORATED</h1>
+
+      {/* Main Page View */}
+      {view === "main" && (
+        <div className="flex flex-col space-y-4">
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("field")}
+          >
+            Field Inspections
+          </Button>
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("review")}
+          >
+            Review
+          </Button>
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("projectAdmin")}
+          >
+            Project Administration
+          </Button>
+        </div>
+      )}
+
+      {/* Field Inspections Section */}
+      {view === "field" && (
+        <div className="flex flex-col space-y-4">
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("dailyObservation")}
+          >
+            Add Daily Field Observation
+          </Button>
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("sampling")}
+          >
+            Sampling
+          </Button>
+          <Button variant="outline" onClick={() => setView("main")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Add Daily Field Observation */}
+      {view === "dailyObservation" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Job Number"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Textarea
+            placeholder="Observation Report"
+            value={report}
+            onChange={(e) => setReport(e.target.value)}
+          />
+          <Button variant="outline" onClick={() => setView("field")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Sampling Section */}
+      {view === "sampling" && (
+        <div className="flex flex-col space-y-4">
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("soil")}
+          >
+            Soil
+          </Button>
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("concrete")}
+          >
+            Concrete
+          </Button>
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("grout")}
+          >
+            Grout
+          </Button>
+          <Button
+            className="bg-blue-600 text-white"
+            onClick={() => setView("otherSampling")}
+          >
+            Other
+          </Button>
+          <Button variant="outline" onClick={() => setView("field")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Soil Sampling */}
+      {view === "soil" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Job Number"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Select onValueChange={(value) => setSelectedTest(value)}>
+            <SelectItem value="Proctor">Proctor</SelectItem>
+            <SelectItem value="Sieve Wash">Sieve Wash</SelectItem>
+            <SelectItem value="PI">PI</SelectItem>
+            <SelectItem value="GEX Suite">GEX Suite</SelectItem>
+            <SelectItem value="Other">Other</SelectItem>
+          </Select>
+          {selectedTest === "Other" && (
+            <Input
+              placeholder="Enter Custom Test"
+              value={customTest}
+              onChange={(e) => setCustomTest(e.target.value)}
+            />
+          )}
+          <Button variant="outline" onClick={() => setView("sampling")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Concrete Sampling */}
+      {view === "concrete" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Job Number"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Input
+            placeholder="Concrete Mix Design & Strength"
+            value={mixDesign}
+            onChange={(e) => setMixDesign(e.target.value)}
+          />
+          <div className="space-y-2">
+            <p>7 Day Cylinder: 1</p>
+            <p>28 Day Cylinders: 3</p>
+          </div>
+          <Button variant="outline" onClick={() => setView("sampling")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Grout Sampling */}
+      {view === "grout" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Job Number"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Input
+            placeholder="Grout Mix Design & Strength"
+            value={mixDesign}
+            onChange={(e) => setMixDesign(e.target.value)}
+          />
+          <div className="space-y-2">
+            <p>7 Day Cylinder: 1</p>
+            <p>28 Day Cylinders: 3</p>
+          </div>
+          <Button variant="outline" onClick={() => setView("sampling")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Other Sampling */}
+      {view === "otherSampling" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Job Number"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Textarea
+            placeholder="Enter Test to be Ran"
+            value={customTest}
+            onChange={(e) => setCustomTest(e.target.value)}
+          />
+          <Button variant="outline" onClick={() => setView("sampling")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Review Section */}
+      {view === "review" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Search Job Number"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Button variant="outline" onClick={() => setView("main")}>
+            Back
+          </Button>
+        </div>
+      )}
+
+      {/* Project Administration Section */}
+      {view === "projectAdmin" && (
+        <div className="flex flex-col space-y-4">
+          <Input
+            placeholder="Search and Edit Lab Test Results"
+            value={jobNumber}
+            onChange={(e) => setJobNumber(e.target.value)}
+          />
+          <Button variant="outline" onClick={() => setView("main")}>
+            Back
+          </Button>
+        </div>
+      )}
     </div>
-  </div>
-
-  <div class="container" id="review" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="searchJobNumber" placeholder="Search Job Number" />
-      </div>
-      <button class="button" onclick="viewLabResults()">View Lab Results</button>
-      <button class="button" onclick="backToMainPage()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="projectAdministration" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="editJobNumber" placeholder="Enter Job Number to Edit" />
-      </div>
-      <div class="form-group">
-        <textarea id="editLabResults" placeholder="Edit Lab Test Results"></textarea>
-      </div>
-      <button class="button" onclick="saveEditedResults()">Save Changes</button>
-      <button class="button" onclick="backToMainPage()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="dailyObservation" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="jobNumber" placeholder="Job Number" />
-      </div>
-      <div class="form-group">
-        <textarea id="report" placeholder="Observation Report"></textarea>
-      </div>
-      <button class="button" onclick="backToFieldInspection()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="sampling" style="display:none;">
-    <div class="flex-column space-y-4">
-      <button class="button" onclick="showSoil()">Soil</button>
-      <button class="button" onclick="showConcrete()">Concrete</button>
-      <button class="button" onclick="showGrout()">Grout</button>
-      <button class="button" onclick="showOther()">Other</button>
-      <button class="button" onclick="backToFieldInspection()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="soil" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="soilJobNumber" placeholder="Job Number" />
-      </div>
-      <div class="form-group">
-        <select id="soilTest" onchange="showCustomTestInput()">
-          <option value="">Select Test</option>
-          <option value="Proctor">Proctor Curve</option>
-          <option value="PI">PI</option>
-          <option value="GEX Suite">GEX Suite</option>
-          <option value="Sieve Wash">Sieve Wash</option>
-          <option value="Wash #200">Wash #200</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div class="form-group" id="customTestInput" style="display:none;">
-        <input type="text" id="customTest" placeholder="Enter Custom Test" />
-      </div>
-      <button class="button" onclick="backToSampling()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="concrete" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="concreteJobNumber" placeholder="Job Number" />
-      </div>
-      <div class="form-group">
-        <input type="text" id="concreteMix" placeholder="Concrete Mix Design & Strength" />
-      </div>
-      <div class="form-group">
-        <p>7 Day Cylinder: 1</p>
-        <p>28 Day Cylinders: 3</p>
-      </div>
-      <button class="button" onclick="backToSampling()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="grout" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="groutJobNumber" placeholder="Job Number" />
-      </div>
-      <div class="form-group">
-        <input type="text" id="groutMix" placeholder="Grout Mix Design & Strength" />
-      </div>
-      <div class="form-group">
-        <p>7 Day Cylinder: 1</p>
-        <p>28 Day Cylinders: 3</p>
-      </div>
-      <button class="button" onclick="backToSampling()">Back</button>
-    </div>
-  </div>
-
-  <div class="container" id="otherSampling" style="display:none;">
-    <div class="flex-column space-y-4">
-      <div class="form-group">
-        <input type="text" id="otherJobNumber" placeholder="Job Number" />
-      </div>
-      <div class="form-group">
-        <textarea id="otherTest" placeholder="Enter Test to be Ran"></textarea>
-      </div>
-      <button class="button" onclick="backToSampling()">Back</button>
-    </div>
-  </div>
-
-  <script>
-    function showFieldInspection() {
-      document.getElementById('mainPage').style.display = 'none';
-      document.getElementById('fieldInspection').style.display = 'block';
-    }
-
-    function backToMainPage() {
-      document.getElementById('fieldInspection').style.display = 'none';
-      document.getElementById('review').style.display = 'none';
-      document.getElementById('projectAdministration').style.display = 'none';
-      document.getElementById('sampling').style.display = 'none';
-      document.getElementById('soil').style.display = 'none';
-      document.getElementById('concrete').style.display = 'none';
-      document.getElementById('grout').style.display = 'none';
-      document.getElementById('otherSampling').style.display = 'none';
-      document.getElementById('mainPage').style.display = 'block';
-    }
-
-    function showReview() {
-      document.getElementById('mainPage').style.display = 'none';
-      document.getElementById('review').style.display = 'block';
-    }
-
-    function showProjectAdministration() {
-      document.getElementById('mainPage').style.display = 'none';
-      document.getElementById('projectAdministration').style.display = 'block';
-    }
-
-    function viewLabResults() {
-      const jobNumber = document.getElement
+  );
+}
