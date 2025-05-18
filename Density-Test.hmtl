@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Density Test Entry</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .button {
+      background-color: #003366;
+      color: white;
+      padding: 12px 20px;
+      margin: 25px 5px 0 0;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 48%;
+    }
+    .button:hover {
+      background-color: #002244;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
+  <script>
+    function calculateDryDensity() {
+      const wetDensity = parseFloat(document.getElementById('wetDensity').value);
+      const moisture = parseFloat(document.getElementById('moisture').value);
+
+      if (!isNaN(wetDensity) && !isNaN(moisture)) {
+        const dryDensity = wetDensity / (1 + moisture / 100);
+        document.getElementById('dryDensity').value = dryDensity.toFixed(2);
+      } else {
+        document.getElementById('dryDensity').value = '';
+      }
+    }
+
+    function saveData() {
+      alert("Data saved! (Functionality can be connected to SharePoint, backend, or file export)");
+    }
+  </script>
+</head>
+<body>
+
+  <h1>Density Test Entry</h1>
+
+  <form onsubmit="event.preventDefault(); saveData();">
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" placeholder="Enter full location name">
+
+    <label for="elevation">Elevation Reference:</label>
+    <input type="text" id="elevation" name="elevation" placeholder="e.g., BM 105.7'">
+
+    <label for="proctor">Select Proctor:</label>
+    <select id="proctor" name="proctor">
+      <option value="">-- Select Proctor --</option>
+      <option value="Proctor 1">Proctor 1</option>
+      <option value="Proctor 2">Proctor 2</option>
+      <option value="Proctor 3">Proctor 3</option>
+      <option value="Proctor 4">Proctor 4</option>
+      <option value="Proctor 5">Proctor 5</option>
+      <option value="Proctor 6">Proctor 6</option>
+      <option value="Proctor 7">Proctor 7</option>
+      <option value="Proctor 8">Proctor 8</option>
+      <option value="Proctor 9">Proctor 9</option>
+      <option value="Proctor 10">Proctor 10</option>
+    </select>
+
+    <label for="wetDensity">Wet Density (pcf):</label>
+    <input type="number" id="wetDensity" name="wetDensity" step="0.01" oninput="calculateDryDensity()">
+
+    <label for="moisture">Moisture %:</label>
+    <input type="number" id="moisture" name="moisture" step="0.01" oninput="calculateDryDensity()">
+
+    <label for="dryDensity">Dry Density (pcf):</label>
+    <input type="text" id="dryDensity" name="dryDensity" readonly>
+
+    <div class="button-container">
+      <button type="submit" class="button">Save</button>
+      <a href="Field-Inspections.html" class="button">Back to Field Inspections</a>
+    </div>
+  </form>
+
+</body>
+</html>
 
