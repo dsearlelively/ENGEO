@@ -1,73 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
-    <style>
-        /* General Page Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FieldOps Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                500: '#0ea5e9',
+                600: '#0284c7',
+                700: '#0369a1',
+                900: '#0c4a6e',
+              }
+            }
+          }
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px;
-            text-align: center;
-        }
-
-        .main-title {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 40px;
-        }
-
-        /* Button Styling */
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px; /* Reduced gap between buttons */
-        }
-
-        .button-link {
-            background-color: #003366;
-            color: white;
-            padding: 15px 30px;
-            margin: 10px 0; /* Reduced margin */
-            text-decoration: none;
-            font-size: 20px;
-            border-radius: 8px;
-            width: 250px;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-
-        .button-link:hover {
-            background-color: #002244;
-        }
-    </style>
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
 </head>
-<body>
-    <div class="container">
-        <h1 class="main-title">ENGEO INCORPORATED</h1>
-
-        <!-- Buttons Section -->
-        <div class="button-container">
-            <!-- Field Inspections Button -->
-            <a href="field-inspections.html" class="button-link">Field Inspections</a>
-            
-            <!-- Review Button -->
-            <a href="review.html" class="button-link">Review</a>
-            
-            <!-- Project Administration Button -->
-            <a href="project-administration.html" class="button-link">Project Administration</a>
-        </div>
-    </div>
-
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
